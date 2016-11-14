@@ -117,7 +117,9 @@ switch(program.author)
 		break
 }
 
-//console.log(program.price);
+ParseFloat(program);
+
+console.log(price);
 
 switch(program.price)
 {
@@ -166,25 +168,25 @@ switch(program.kind)
 		console.log("Author: " + book1_author);
 		console.log("Price: " + book1_price);
 		console.log("Kind: " + book1_kind);
-		break;
+		//break;
 	case book2_kind:
 		console.log("Title: " + book2_title);
 		console.log("Author: " + book2_author);
 		console.log("Price: " + book2_price);
 		console.log("Kind: " + book2_kind);
-		break;
+		//break;
 	case book3_kind:
 		console.log("Title: " + book3_title);
 		console.log("Author: " + book3_author);
 		console.log("Price: " + book3_price);
 		console.log("Kind: " + book3_kind);
-		break;
+		//break;
 	case book4_kind:
 		console.log("Title: " + book4_title);
 		console.log("Author: " + book4_author);
 		console.log("Price: " + book4_price);
 		console.log("Kind: " + book4_kind);
-		break; 
+		//break; 
 	case book5_kind:
 		console.log("Title: " + book5_title);
 		console.log("Author: " + book5_author);
