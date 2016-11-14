@@ -1,0 +1,9 @@
+
+ Usage: letter [options]
+
+ Options:
+
+   -h, --help              output usage information
+   -V, --version           output the version number
+   -w, --width [value]     The width of the sentences in the lette
+   -s, --sentence [value]  The amount of sentences in the letter
