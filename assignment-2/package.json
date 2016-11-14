@@ -1,0 +1,17 @@
+{
+  "name": "assignment-2",
+  "version": "1.0.0",
+  "description": "letters",
+  "main": "Letter3.js",
+  "dependencies": {
+    "chance": "^1.0.4",
+    "commander": "^2.9.0",
+    "word-wrap": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "eva",
+  "license": "ISC"
+}
