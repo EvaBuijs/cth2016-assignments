@@ -1,0 +1,165 @@
+<html>
+	<head>	
+		<title>Do a Twitter Search!</title>	
+		<style>
+			/* CSS Styling */
+			#the_title {
+				font-family: arial;
+				font-size: 24;
+			}			
+			#frame {
+				width: 100%;
+			}
+			#inputs{
+				font-family: arial;
+				font-size: 20;
+				bborder: 1px solid black;
+			}
+			#results {
+				font-family: arial;
+			}
+			.hit {
+				bborder: 1px solid green;
+				display: inline-block;
+				padding: 1em;
+				max-width: 400px;
+				vertical-align: top;
+			}
+			.tweet_image img {
+				max-width: 400px;
+				margin: 0.3em;
+			}
+			.tweet_text{
+			 	font: arial;
+			 	font-size: 16;
+			}
+			h1 {
+				text-align: center;
+			}
+			h2 {
+				font-size: 20;
+				text-align: center;
+			}
+			h3 {
+				font-family: arial;
+				text-align: center;
+				margin-left: 150;
+				margin-right: 150;
+			}
+			#search-button {
+				text-align: center;
+			}
+			#err {
+				font-family: arial;
+				text-align: center;
+			}
+
+		</style>
+		<!-- SCRIPTS -->
+		<!-- import handlebars -->		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+		<!-- import jquery -->		
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>		
+	</head>
+	<body style= "background-image:url(http://cdn.neurogadget.net/wp-content/uploads/2016/09/twitter-3.jpg); background-repeat:no-repeat ; background-attachment:fixed ; background-size:cover">
+		<!-- HTML -->
+		<br>
+		<label id="the_title"><h1><img src="http://www.webdirections.org/meetups/images/twitter.svg" alt="some_text" style="width:50;height:height;">
+		Do a Twitter Search!</h1></label>
+		<label id="ondertitel"><h3>This is a webpage to search for tweets in a Twitteraccount of your choosing. Just type in the @accountname you want to look into and an optional keyword. Enjoy!</h3></label>
+		<br>
+		<div id="frame">
+			<!-- inputs for the search to send to server -->
+			<div id="inputs">
+				<h2><label>Username: </label>
+				<input id="username_text_field" type="text"/>
+				<label>Keyword: </label>
+				<input id="keyword_text_field" type="text"/>			
+				<label>Amount of results: </label>
+				<input id="nbr_results" type="number" value="50" min="50" max="500"></h2>
+				<!-- <search button -->
+			</div>	
+			<div id="search-button">
+				<input style="width:60px;height:30px " type="button" value="Search" onclick="search();"/>
+				<div </div>
+			<br>
+			<br>
+			</div>
+
+			<div id="err"></div>
+			<div id="results">
+				<script id="results-template" type="text/x-handlebars-template">
+					{{#each this}}
+					<div class="hit">
+						<div class='tweet_text'>{{text}}</div>
+						{{#if images}}
+							{{#each images}}
+								<div class='tweet_image'>
+									<img src={{this}} />
+								</div>
+							{{/each}}		
+						{{/if}}
+					</div>
+					{{/each}}
+				</script>
+			</div>
+
+		</div>		
+
+		<!-- SCRIPTS -->
+		<!-- import socket.io -->
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			// connect to localhost on its port (see server.js -- 8088)
+		  var socket = io().connect('http://localhost:8088');
+
+		  // when connecting 
+		  socket.on('connect', function (data) {
+		  	console.log('connected');
+		  });
+
+		  // when receiving a custom message form the server ('search_twitter_results')
+		  socket.on('search_twitter_results', function(msg) {
+
+		  	console.log('search_twitter_results: ' + JSON.stringify(msg));
+
+		  	compile_results_and_dispay(msg);
+		  });
+
+		  // when search button is pressed
+		  function search() {
+
+		  	var username = document.getElementById("username_text_field").value;
+		  	var keyword = document.getElementById("keyword_text_field").value;
+		  	var hits = document.getElementById("nbr_results").value;
+
+			// create search parameters that will be sent to the server
+		  	var search_params = {username: username, keyword: keyword, nbr_hits: hits}
+
+		  	// send request to the server
+		  	socket.emit('search_twitter', search_params);
+
+		  }
+
+		  function compile_results_and_dispay(results) {
+
+		  	var template_script = $("#results-template").html(); 
+
+			var template = Handlebars.compile(template_script);
+
+			$('.hit').remove();
+
+			$('#results').append(template(results));
+
+			
+		  	if (results.length == 0) {
+		  		document.getElementById("err").innerHTML = "Sorry, no results. Try something else!";
+		  	} else {
+		  		document.getElementById("err").innerHTML = '';
+		  	}
+
+		  }
+
+		</script>		
+	</body>
+</html>

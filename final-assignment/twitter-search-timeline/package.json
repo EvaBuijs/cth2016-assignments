@@ -1,0 +1,17 @@
+{
+  "name": "do-a-twitter-search",
+  "version": "1.0.0",
+  "description": "simple twitter search",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eva en Nicole",
+  "license": "ISC",
+  "dependencies": {
+    "chance": "^1.0.4",
+    "express": "^4.14.0",
+    "socket.io": "^1.6.0",
+    "twitter": "^1.4.0"
+  }
+}
