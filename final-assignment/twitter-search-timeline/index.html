@@ -79,6 +79,7 @@
 				<input id="nbr_results" type="number" value="50" min="50" max="500"></h2>
 				<!-- <search button -->
 			</div>	
+			<!-- style the search button -->
 			<div id="search-button">
 				<input style="width:60px;height:30px " type="button" value="Search" onclick="search();"/>
 				<div </div>
@@ -151,7 +152,7 @@
 
 			$('#results').append(template(results));
 
-			
+			// errormessage for when there are no results for the keyword.
 		  	if (results.length == 0) {
 		  		document.getElementById("err").innerHTML = "Sorry, no results. Try something else!";
 		  	} else {

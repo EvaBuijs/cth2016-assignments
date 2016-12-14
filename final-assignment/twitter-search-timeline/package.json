@@ -1,12 +1,12 @@
 {
-  "name": "do-a-twitter-search",
+  "name": "Twitter for stalkers",
   "version": "1.0.0",
-  "description": "simple twitter search",
+  "description": "simple twitter account search",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Eva en Nicole",
+  "author": "Eva and Nicole",
   "license": "ISC",
   "dependencies": {
     "chance": "^1.0.4",
